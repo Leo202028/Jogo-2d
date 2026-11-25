@@ -1,0 +1,275 @@
+/* Estilos gerais do jogo Floresta dos Olhos Rubros */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-pagina: #0d1310;
+  --painel-bg: rgba(16, 24, 20, 0.94);
+  --borda-ouro: #c8a24b;
+  --texto-claro: #edf2ec;
+  --texto-suave: #a6b8ab;
+  --vermelho-rubro: #ff2a2a;
+  --verde-destaque: #44bd5a;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #18261d 0%, var(--bg-pagina) 75%);
+  color: var(--texto-claro);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+.palco-jogo {
+  position: relative;
+  width: min(960px, 98vw);
+  aspect-ratio: 960 / 640;
+  border: 3px solid #2e4234;
+  border-radius: 10px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(200, 162, 75, 0.25);
+  overflow: hidden;
+  background: #1b2d1f;
+}
+
+#telaJogo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+/* Camadas modais de Início, Pausa e Fim de Jogo */
+.sobreposicao {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(7, 12, 9, 0.78);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.sobreposicao.ativa {
+  display: flex;
+}
+
+.cartao-modal {
+  width: min(640px, 94%);
+  background: var(--painel-bg);
+  border: 2px solid var(--borda-ouro);
+  border-radius: 12px;
+  padding: 28px 30px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.cartao-modal.compacto {
+  width: min(400px, 90%);
+}
+
+/* Ícone estilizado dos olhos vermelhos do inimigo */
+.emblema-olhos {
+  display: inline-flex;
+  gap: 16px;
+  padding: 10px 20px;
+  background: #1e4d26;
+  border: 2px solid #357c3f;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.emblema-olhos .olho {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--vermelho-rubro);
+  box-shadow: 0 0 10px var(--vermelho-rubro), 0 0 18px rgba(255, 42, 42, 0.7);
+}
+
+h1 {
+  font-size: 1.95rem;
+  color: #f4d678;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 1.45rem;
+  color: #f4d678;
+  margin-bottom: 8px;
+}
+
+.titulo-derrota {
+  color: #ff6b6b;
+}
+
+.subtitulo {
+  color: var(--texto-suave);
+  font-size: 0.96rem;
+  line-height: 1.45;
+  margin-bottom: 20px;
+}
+
+.grade-instrucoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.bloco-info {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.bloco-info h2 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #d9bf77;
+  margin-bottom: 8px;
+}
+
+.bloco-info ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.86rem;
+  color: var(--texto-claro);
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 0.78rem;
+  font-family: Consolas, monospace;
+  background: #233329;
+  border: 1px solid #496654;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  color: #f5e6b3;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.etiqueta.verde {
+  background: #286e33;
+  color: #b7ffbf;
+}
+
+.etiqueta.musgo {
+  background: #3d6324;
+  color: #d8f8b0;
+}
+
+.etiqueta.escuro {
+  background: #184426;
+  color: #9bf2b4;
+}
+
+.resumo-partida {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.stat-rotulo {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-bottom: 4px;
+}
+
+.stat-card strong {
+  font-size: 1.08rem;
+  color: #f4d678;
+}
+
+.acoes-modal {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-primario,
+.btn-secundario {
+  padding: 11px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.btn-primario {
+  background: linear-gradient(180deg, #e5be5c 0%, #ba8d2f 100%);
+  color: #1b1407;
+  box-shadow: 0 4px 14px rgba(200, 162, 75, 0.35);
+}
+
+.btn-secundario {
+  background: #2a3c31;
+  color: var(--texto-claro);
+  border: 1px solid #4c6b58;
+}
+
+.btn-primario:hover,
+.btn-secundario:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.btn-primario:active,
+.btn-secundario:active {
+  transform: translateY(1px);
+}
+
+.dica-atalho {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 640px) {
+  .grade-instrucoes,
+  .resumo-partida {
+    grid-template-columns: 1fr;
+  }
+
+  .cartao-modal {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 1.45rem;
+  }
+}
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Floresta dos Olhos Rubros — RPG 2D</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="palco-jogo">
+    <!-- Canvas principal onde todo o mundo 2D e o HUD são renderizados -->
+    <canvas id="telaJogo" width="960" height="640" aria-label="Área do jogo RPG 2D"></canvas>
+
+    <!-- Tela de Início -->
+    <section id="telaInicio" class="sobreposicao ativa" aria-labelledby="tituloJogo">
+      <div class="cartao-modal">
+        <div class="emblema-olhos" aria-hidden="true">
+          <span class="olho"></span>
+          <span class="olho"></span>
+        </div>
+        <h1 id="tituloJogo">Floresta dos Olhos Rubros</h1>
+        <p class="subtitulo">
+          Explore a clareira, enfrente os monstros verdes de olhos vermelhos,
+          colete roupas mais resistentes e suba de nível!
+        </p>
+
+        <div class="grade-instrucoes">
+          <div class="bloco-info">
+            <h2>Controles</h2>
+            <ul>
+              <li><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> ou <kbd>Setas</kbd> — Movimentar</li>
+              <li><kbd>Espaço</kbd>, <kbd>J</kbd> ou <kbd>Clique</kbd> — Atacar com espada</li>
+              <li><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> — Trocar roupa equipada</li>
+              <li><kbd>P</kbd> — Pausar &nbsp;|&nbsp; <kbd>M</kbd> — Silenciar som</li>
+            </ul>
+          </div>
+          <div class="bloco-info">
+            <h2>Inimigos</h2>
+            <ul>
+              <li><span class="etiqueta verde">Gosma Caçadora</span> — Persegue o herói</li>
+              <li><span class="etiqueta musgo">Duende Atirador</span> — Ataca à distância</li>
+              <li><span class="etiqueta escuro">Sentinela Bruto</span> — Patrulha e guarda áreas</li>
+            </ul>
+          </div>
+        </div>
+
+        <button id="btnIniciar" class="btn-primario" type="button">
+          Iniciar Aventura
+        </button>
+        <p class="dica-atalho">Pressione <kbd>Enter</kbd> ou <kbd>Espaço</kbd> para começar</p>
+      </div>
+    </section>
+
+    <!-- Tela de Pausa -->
+    <section id="telaPausa" class="sobreposicao" aria-labelledby="tituloPausa">
+      <div class="cartao-modal compacto">
+        <h2 id="tituloPausa">Jogo Pausado</h2>
+        <p class="subtitulo">Respire fundo antes de voltar ao combate.</p>
+        <div class="acoes-modal">
+          <button id="btnContinuar" class="btn-primario" type="button">Continuar</button>
+          <button id="btnReiniciarPausa" class="btn-secundario" type="button">Reiniciar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tela de Fim de Jogo -->
+    <section id="telaFim" class="sobreposicao" aria-labelledby="tituloFim">
+      <div class="cartao-modal">
+        <h2 id="tituloFim" class="titulo-derrota">Você Caiu em Combate</h2>
+        <p class="subtitulo">Os monstros da floresta prevaleceram desta vez.</p>
+
+        <div class="resumo-partida" id="resumoPartida">
+          <div class="stat-card">
+            <span class="stat-rotulo">Nível Alcançado</span>
+            <strong id="fimNivel">1</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-rotulo">Monstros Derrotados</span>
+            <strong id="fimAbates">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-rotulo">Roupa Equipada</span>
+            <strong id="fimRoupa">Túnica de Viajante</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-rotulo">Tempo Sobrevivido</span>
+            <strong id="fimTempo">00:00</strong>
+          </div>
+        </div>
+
+        <button id="btnReiniciar" class="btn-primario" type="button">
+          Jogar Novamente
+        </button>
+        <p class="dica-atalho">Pressione <kbd>Enter</kbd> para tentar outra vez</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts carregados em ordem para funcionar tanto em file:// quanto em servidor HTTP -->
+  <script defer src="js/config.js"></script>
+  <script defer src="js/mapa.js"></script>
+  <script defer src="js/sprites.js"></script>
+  <script defer src="js/combate.js"></script>
+  <script defer src="js/progressao.js"></script>
+  <script defer src="js/entidades.js"></script>
+  <script defer src="js/interface.js"></script>
+  <script defer src="js/jogo.js"></script>
+</body>
+</html>
+
